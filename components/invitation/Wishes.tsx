@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { invitation } from "@/data/invitation";
+import wishesData from "@/data/wishes.json";
 
 export default function Wishes() {
   const [name, setName] = useState("");
@@ -60,9 +61,9 @@ export default function Wishes() {
           </div>
         </div>
 
-        {/* Static wishes list */}
+        {/* Static wishes list from JSON */}
         <div className="space-y-4">
-          {invitation.wishes.map((wish, index) => (
+          {wishesData.map((wish, index) => (
             <div
               key={index}
               className="bg-white rounded-2xl p-5 shadow-sm border border-rose-100"
