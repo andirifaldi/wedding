@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Opening from "@/components/invitation/Opening";
 import Couple from "@/components/invitation/Couple";
+import Gallery from "@/components/invitation/Gallery";
 import Event from "@/components/invitation/Event";
 import Countdown from "@/components/invitation/Countdown";
 import RSVP from "@/components/invitation/RSVP";
@@ -16,6 +17,7 @@ export default function Home() {
       {opened && (
         <main className="animate-slide-up">
           <Couple />
+          <Gallery />
           <Countdown />
           <Event />
           <RSVP />
