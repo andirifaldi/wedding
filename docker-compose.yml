@@ -1,0 +1,13 @@
+services:
+  wedding-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wedding-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./public/music:/app/public/music:ro
+    environment:
+      - NODE_ENV=production
