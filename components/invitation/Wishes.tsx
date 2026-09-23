@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import wishesData from "@/data/wishes.json";
+import { useState, useEffect } from "react";
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbx-1WGP2SDcLLt3qTwA90GxO4RUMOxi5jOQtv_v3vHuGDEEw70_7cGAw_MeItvmHuZaDA/exec";
+  "https://script.google.com/macros/s/AKfycbynai93vd1XfFHfh7UT2s05giAfXSmGBZxozZ_vnEknLc-MdFA0mbHvVRgEmMqoliCPMQ/exec";
+
+interface Wish {
+  name: string;
+  message: string;
+  timestamp?: string;
+}
 
 export default function Wishes() {
   const [name, setName] = useState("");
@@ -12,6 +17,21 @@ export default function Wishes() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+  const [wishes, setWishes] = useState<Wish[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch wishes from Google Sheets on mount
+  useEffect(() => {
+    fetch(APPS_SCRIPT_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.data) {
+          setWishes(data.data.reverse()); // newest first
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
 
   const handleSubmit = async () => {
     if (!name.trim() || !message.trim()) {
@@ -23,15 +43,27 @@ export default function Wishes() {
     setError("");
 
     try {
-      const res = await fetch(APPS_SCRIPT_URL, {
+      await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: name.trim(), message: message.trim() }),
       });
+
       setSent(true);
       setName("");
       setMessage("");
+
+      // Refresh list after a short delay (Google Sheets needs ~2-3s to save)
+      setTimeout(() => {
+        fetch(APPS_SCRIPT_URL)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.data) {
+              setWishes(data.data.reverse());
+            }
+          });
+      }, 3000);
     } catch {
       setError("Gagal mengirim. Silakan coba lagi.");
     } finally {
@@ -79,9 +111,7 @@ export default function Wishes() {
               />
             </div>
 
-            {error && (
-              <p className="text-red-500 text-sm">{error}</p>
-            )}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             {sent && (
               <p className="text-green-600 text-sm font-medium">
@@ -99,25 +129,35 @@ export default function Wishes() {
           </div>
         </div>
 
-        {/* Static wishes list from JSON */}
-        <div className="space-y-4">
-          {wishesData.map((wish, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-5 shadow-sm border border-rose-100"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-400 to-amber-400 flex items-center justify-center text-white font-bold text-sm">
-                  {wish.name[0]}
+        {/* Wishes list from Google Sheets */}
+        {loading ? (
+          <div className="text-center text-rose-400 text-sm py-4">Memuat...</div>
+        ) : wishes.length === 0 ? (
+          <div className="text-center text-rose-400 text-sm py-4">
+            Belum ada ucapan. Jadilah yang pertama!
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {wishes.map((wish, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-5 shadow-sm border border-rose-100"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-400 to-amber-400 flex items-center justify-center text-white font-bold text-sm">
+                    {wish.name[0]}
+                  </div>
+                  <p className="font-semibold text-rose-800 text-sm">
+                    {wish.name}
+                  </p>
                 </div>
-                <p className="font-semibold text-rose-800 text-sm">{wish.name}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {wish.message}
+                </p>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {wish.message}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
