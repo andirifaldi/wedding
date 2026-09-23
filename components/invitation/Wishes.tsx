@@ -1,18 +1,42 @@
 "use client";
 
 import { useState } from "react";
-import { invitation } from "@/data/invitation";
 import wishesData from "@/data/wishes.json";
+
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbx-1WGP2SDcLLt3qTwA90GxO4RUMOxi5jOQtv_v3vHuGDEEw70_7cGAw_MeItvmHuZaDA/exec";
 
 export default function Wishes() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = () => {
-    const text = encodeURIComponent(
-      `Assalamu'alaikum Warahmatullahi Wabarakatuh\n\nSaya ${name || "Tamu"} ingin menyampaikan ucapan dan doa:\n\n"${message}"`
-    );
-    window.open(`https://wa.me/${invitation.whatsappNumber}?text=${text}`, "_blank");
+  const handleSubmit = async () => {
+    if (!name.trim() || !message.trim()) {
+      setError("Nama dan ucapan harus diisi.");
+      return;
+    }
+
+    setSending(true);
+    setError("");
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name.trim(), message: message.trim() }),
+      });
+      setSent(true);
+      setName("");
+      setMessage("");
+    } catch {
+      setError("Gagal mengirim. Silakan coba lagi.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -37,7 +61,8 @@ export default function Wishes() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Masukkan nama Anda"
-                className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm text-gray-700 placeholder-gray-400"
+                disabled={sending}
+                className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm text-gray-700 placeholder-gray-400 disabled:opacity-50"
               />
             </div>
             <div>
@@ -49,14 +74,27 @@ export default function Wishes() {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Tulis ucapan dan doa terbaik Anda..."
                 rows={4}
-                className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm text-gray-700 placeholder-gray-400 resize-none"
+                disabled={sending}
+                className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm text-gray-700 placeholder-gray-400 resize-none disabled:opacity-50"
               />
             </div>
+
+            {error && (
+              <p className="text-red-500 text-sm">{error}</p>
+            )}
+
+            {sent && (
+              <p className="text-green-600 text-sm font-medium">
+                ✅ Terima kasih! Ucapan Anda telah terkirim.
+              </p>
+            )}
+
             <button
               onClick={handleSubmit}
-              className="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
+              disabled={sending}
+              className="w-full py-3.5 bg-rose-800 hover:bg-rose-700 disabled:opacity-50 text-white font-semibold rounded-xl text-sm transition-colors"
             >
-              📱 Kirim via WhatsApp
+              {sending ? "Mengirim..." : "Kirim Ucapan & Doa"}
             </button>
           </div>
         </div>
@@ -72,9 +110,7 @@ export default function Wishes() {
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-400 to-amber-400 flex items-center justify-center text-white font-bold text-sm">
                   {wish.name[0]}
                 </div>
-                <p className="font-semibold text-rose-800 text-sm">
-                  {wish.name}
-                </p>
+                <p className="font-semibold text-rose-800 text-sm">{wish.name}</p>
               </div>
               <p className="text-gray-600 text-sm leading-relaxed">
                 {wish.message}
