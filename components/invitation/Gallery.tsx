@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const photos = [
   { src: "/images/couple.jpg", alt: "Foto Pasangan" },
@@ -12,9 +12,30 @@ const photos = [
 
 export default function Gallery() {
   const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
 
-  const prev = () => setCurrent((c) => (c === 0 ? photos.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === photos.length - 1 ? 0 : c + 1));
+  const goTo = useCallback((index: number) => {
+    if (animating) return;
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(index);
+      setTimeout(() => setAnimating(false), 50);
+    }, 300);
+  }, [animating]);
+
+  const prev = () => {
+    goTo(current === 0 ? photos.length - 1 : current - 1);
+  };
+
+  const next = useCallback(() => {
+    goTo(current === photos.length - 1 ? 0 : current + 1);
+  }, [current, goTo]);
+
+  // Auto-advance every 10 seconds
+  useEffect(() => {
+    const timer = setInterval(next, 10000);
+    return () => clearInterval(timer);
+  }, [next]);
 
   return (
     <section className="py-16 px-6 bg-gradient-to-b from-white to-rose-50">
@@ -26,25 +47,29 @@ export default function Gallery() {
           Moments
         </h2>
 
-        {/* Slider */}
         <div className="relative">
           <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl relative">
             <img
+              key={current}
               src={photos[current].src}
               alt={photos[current].alt}
-              className="w-full h-full object-cover transition-all duration-500"
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${
+                animating
+                  ? "opacity-0 scale-105 translate-x-8"
+                  : "opacity-100 scale-100 translate-x-0"
+              }`}
             />
 
-            {/* Overlay nav */}
+            {/* Nav buttons */}
             <button
               onClick={prev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm text-rose-800 flex items-center justify-center text-lg font-bold shadow-md hover:bg-white transition-colors"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm text-rose-800 flex items-center justify-center text-lg font-bold shadow-md hover:bg-white transition-colors z-10"
             >
               ‹
             </button>
             <button
-              onClick={next}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm text-rose-800 flex items-center justify-center text-lg font-bold shadow-md hover:bg-white transition-colors"
+              onClick={() => next()}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm text-rose-800 flex items-center justify-center text-lg font-bold shadow-md hover:bg-white transition-colors z-10"
             >
               ›
             </button>
@@ -60,7 +85,7 @@ export default function Gallery() {
             {photos.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setCurrent(i)}
+                onClick={() => goTo(i)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === current
                     ? "w-6 bg-rose-800"
