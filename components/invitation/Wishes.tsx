@@ -1,6 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import { invitation } from "@/data/invitation";
 
 export default function Wishes() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = () => {
+    const text = encodeURIComponent(
+      `Assalamu'alaikum Warahmatullahi Wabarakatuh\n\nSaya ${name || "Tamu"} ingin menyampaikan ucapan dan doa:\n\n"${message}"`
+    );
+    window.open(`https://wa.me/${invitation.whatsappNumber}?text=${text}`, "_blank");
+  };
+
   return (
     <section className="py-16 px-6 bg-cream/20">
       <div className="max-w-xl mx-auto">
@@ -11,6 +24,43 @@ export default function Wishes() {
           Kirimkan doa terbaik untuk kami
         </p>
 
+        {/* Form */}
+        <div className="bg-white rounded-3xl p-6 shadow-sm border border-rose-100 mb-8">
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-rose-700 mb-1.5">
+                Nama
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Masukkan nama Anda"
+                className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm text-gray-700 placeholder-gray-400"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-rose-700 mb-1.5">
+                Ucapan & Doa
+              </label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Tulis ucapan dan doa terbaik Anda..."
+                rows={4}
+                className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm text-gray-700 placeholder-gray-400 resize-none"
+              />
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
+            >
+              📱 Kirim via WhatsApp
+            </button>
+          </div>
+        </div>
+
+        {/* Static wishes list */}
         <div className="space-y-4">
           {invitation.wishes.map((wish, index) => (
             <div
