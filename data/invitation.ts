@@ -1,11 +1,11 @@
 export const invitation = {
   groom: {
-    name: "Andi Rifaldi",
-    parents: "Bapak Andi & Ibu Andi",
+    name: "Aditya Fahmi Nugraha",
+    parents: "Bapak Adit & Ibu Adit",
   },
   bride: {
-    name: "Rina Putri",
-    parents: "Bapak Rina & Ibu Rina",
+    name: "Vera Noverinda",
+    parents: "Bapak Vera & Ibu Vera",
   },
   wedding: {
     date: "12 Juni 2027",
@@ -38,7 +38,7 @@ export const invitation = {
     {
       name: "Maya",
       message:
-        "Selamat untuk Andi & Rina! Doa terbaik untuk kehidupan bersama kalian.",
+        "Selamat untuk Adit & Vera! Doa terbaik untuk kehidupan bersama kalian.",
     },
   ],
   whatsappNumber: "6281234567890",

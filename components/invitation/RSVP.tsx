@@ -8,7 +8,7 @@ export default function RSVP() {
 
   const handleSubmit = () => {
     const msg = encodeURIComponent(
-      `Halo, saya ${name || "Tamu"} ingin mengonfirmasi kehadiran untuk acara pernikahan Andi & Rina.\nStatus: ${attending ? "Saya akan hadir" : "Maaf, saya tidak bisa hadir"}.`
+      `Halo, saya ${name || "Tamu"} ingin mengonfirmasi kehadiran untuk acara pernikahan Adit & Vera.\nStatus: ${attending ? "Saya akan hadir" : "Maaf, saya tidak bisa hadir"}.`
     );
     window.open(`https://wa.me/${invitation.whatsappNumber}?text=${msg}`, "_blank");
   };

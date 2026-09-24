@@ -59,7 +59,7 @@ Halaman pertama sebelum undangan dibuka.
 Isi:
 ```
 THE WEDDING OF
-Andi & Rina
+Adit & Vera
 12 Juni 2027
 [ Buka Undangan ]
 ```
@@ -73,13 +73,13 @@ const [opened, setOpened] = useState(false);
 Menampilkan informasi pasangan.
 Contoh:
 ```
-Andi Rifaldi Putra
-dari Bapak Andi & Ibu Andi
+Aditya Fahmi Nugraha Putra
+dari Bapak Adit & Ibu Adit
 
 &
 
-Rina Putri
-dari Bapak Rina & Ibu Rina
+Vera Noverinda
+dari Bapak Vera & Ibu Vera
 ```
 Data ditulis langsung di kode.
 
@@ -99,7 +99,7 @@ public/
 ```
 Kemudian digunakan:
 ```tsx
-<img src="/images/couple.jpg" alt="Andi dan Rina" />
+<img src="/images/couple.jpg" alt="Adit dan Vera" />
 ```
 
 **7. Section Pernikahan**
@@ -141,7 +141,7 @@ Kehadiran [ Saya akan hadir ]
 Jika ingin tombol benar-benar melakukan sesuatu tanpa backend, bisa diarahkan ke WhatsApp.
 Contoh:
 ```
-https://wa.me/628xxxxxxxxxx?text=Halo,%20saya%20Andi%20ingin%20mengonfirmasi%20kehadiran%20untuk%20acara%20pernikahan.
+https://wa.me/628xxxxxxxxxx?text=Halo,%20saya%20Adit%20ingin%20mengonfirmasi%20kehadiran%20untuk%20acara%20pernikahan.
 ```
 
 **10. Section Ucapan & Doa**
@@ -174,7 +174,7 @@ Form ucapan hanya sebagai elemen visual.
 **11. Footer**
 Footer sederhana:
 ```
-Andi & Rina
+Adit & Vera
 Terima kasih atas doa dan kehadiran Anda. ❤️
 ```
 
@@ -214,12 +214,12 @@ Contoh:
 ```tsx
 export const invitation = {
   groom: {
-    name: "Andi Rifaldi",
-    parents: "Bapak Andi & Ibu Andi",
+    name: "Aditya Fahmi Nugraha",
+    parents: "Bapak Adit & Ibu Adit",
   },
   bride: {
-    name: "Rina Putri",
-    parents: "Bapak Rina & Ibu Rina",
+    name: "Vera Noverinda",
+    parents: "Bapak Vera & Ibu Vera",
   },
   wedding: {
     date: "12 Juni 2027",
