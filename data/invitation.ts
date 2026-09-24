@@ -18,5 +18,5 @@ export const invitation = {
   event: {
     acara: "11:00 WIB - selesai",
   },
-  whatsappNumber: "6281234567890",
+  whatsappNumber: "6287865622562",
 };
