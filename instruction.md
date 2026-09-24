@@ -60,7 +60,7 @@ Isi:
 ```
 THE WEDDING OF
 Adit & Vera
-12 Juni 2027
+3 Oktober 2026
 [ Buka Undangan ]
 ```
 Ketika tombol ditekan, halaman undangan ditampilkan.
@@ -106,7 +106,7 @@ Kemudian digunakan:
 Informasi acara dibuat statis.
 Contoh:
 ```
-Sabtu 12 Juni 2027
+Sabtu 3 Oktober 2026
 Akad & Resepsi
 08:00 WIB - selesai
 Jakarta Convention Center
@@ -222,7 +222,7 @@ export const invitation = {
     parents: "Bapak Nugroho & Ibu Paryati",
   },
   wedding: {
-    date: "12 Juni 2027",
+    date: "3 Oktober 2026",
     time: "08:00 WIB - selesai",
     location: "Jalan Sumurbor Gang Attaqwa II no. 40 RT.6/Rw.12 kalideres ",
     mapsUrl: "https://maps.google.com/...",

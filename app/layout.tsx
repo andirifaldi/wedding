@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "The Wedding of Adit & Vera",
-  description: "Undangan pernikahan Adit & Vera - 12 Juni 2027",
+  description: "Undangan pernikahan Adit & Vera - 3 Oktober 2026",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
