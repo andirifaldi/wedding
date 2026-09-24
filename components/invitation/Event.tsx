@@ -23,15 +23,8 @@ export default function Event() {
             <div className="flex items-start gap-3 text-left">
               <span className="text-rose-400 mt-0.5">🕐</span>
               <div>
-                <p className="font-semibold text-rose-800 text-sm">Akad</p>
-                <p className="text-gray-500 text-sm">{invitation.event.akad}</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 text-left">
-              <span className="text-rose-400 mt-0.5">🎉</span>
-              <div>
-                <p className="font-semibold text-rose-800 text-sm">Resepsi</p>
-                <p className="text-gray-500 text-sm">{invitation.event.resepsi}</p>
+                <p className="font-semibold text-rose-800 text-sm">Acara</p>
+                <p className="text-gray-500 text-sm">{invitation.event.acara}</p>
               </div>
             </div>
           </div>

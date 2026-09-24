@@ -74,12 +74,12 @@ Menampilkan informasi pasangan.
 Contoh:
 ```
 Aditya Fahmi Nugraha Putra
-dari Bapak Adit & Ibu Adit
+dari Bapak Ishak Iskandar & Ibu Nani Maryani
 
 &
 
 Vera Noverinda
-dari Bapak Vera & Ibu Vera
+dari Bapak Nugroho & Ibu Paryati
 ```
 Data ditulis langsung di kode.
 
@@ -215,28 +215,18 @@ Contoh:
 export const invitation = {
   groom: {
     name: "Aditya Fahmi Nugraha",
-    parents: "Bapak Adit & Ibu Adit",
+    parents: "Bapak Ishak Iskandar & Ibu Nani Maryani",
   },
   bride: {
     name: "Vera Noverinda",
-    parents: "Bapak Vera & Ibu Vera",
+    parents: "Bapak Nugroho & Ibu Paryati",
   },
   wedding: {
     date: "12 Juni 2027",
     time: "08:00 WIB - selesai",
-    location: "Jakarta Convention Center",
+    location: "Jalan Sumurbor Gang Attaqwa II no. 40 RT.6/Rw.12 kalideres ",
     mapsUrl: "https://maps.google.com/...",
   },
-  wishes: [
-    {
-      name: "Budi",
-      message: "Selamat menempuh hidup baru.",
-    },
-    {
-      name: "Sinta",
-      message: "Semoga selalu bahagia.",
-    },
-  ],
 };
 ```
 
