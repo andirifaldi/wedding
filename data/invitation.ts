@@ -16,7 +16,7 @@ export const invitation = {
     mapsUrl: "https://maps.google.com/?q=Jakarta+Convention+Center",
   },
   event: {
-    acara: "10:00 WIB - selesai",
+    acara: "11:00 WIB - selesai",
   },
   whatsappNumber: "6281234567890",
 };

@@ -10,30 +10,29 @@ export default function Couple() {
         <h2 className="text-3xl font-serif font-bold text-rose-800 mb-12">
           Mempelai
         </h2>
-
-        {/* Groom */}
-        <div className="mb-10">
-          <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center mb-4 shadow-lg">
-            <span className="text-4xl">👰</span>
-          </div>
-          <h3 className="text-2xl font-serif font-bold text-rose-800 mb-1">
-            {invitation.groom.name}
-          </h3>
-          <p className="text-rose-600 text-sm">{invitation.groom.parents}</p>
-        </div>
-
-        {/* Ampersand */}
-        <div className="text-amber-400 text-3xl font-serif my-6">&</div>
-
         {/* Bride */}
         <div className="mb-8">
           <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center mb-4 shadow-lg">
-            <span className="text-4xl">🤵</span>
+            <span className="text-4xl">👰</span>
           </div>
           <h3 className="text-2xl font-serif font-bold text-rose-800 mb-1">
             {invitation.bride.name}
           </h3>
           <p className="text-rose-600 text-sm">{invitation.bride.parents}</p>
+        </div>
+
+        {/* Ampersand */}
+        <div className="text-amber-400 text-3xl font-serif my-6">&</div>
+
+        {/* Groom */}
+        <div className="mb-10">
+          <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center mb-4 shadow-lg">
+            <span className="text-4xl">🤵</span>
+          </div>
+          <h3 className="text-2xl font-serif font-bold text-rose-800 mb-1">
+            {invitation.groom.name}
+          </h3>
+          <p className="text-rose-600 text-sm">{invitation.groom.parents}</p>
         </div>
       </div>
     </section>

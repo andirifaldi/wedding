@@ -35,15 +35,6 @@ export default function Event() {
             </p>
             <p className="text-gray-500 text-sm">{invitation.wedding.address}</p>
           </div>
-
-          <a
-            href={invitation.wedding.mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-rose-800 text-cream rounded-full text-sm font-semibold hover:bg-rose-700 transition-colors"
-          >
-            📍 Lihat Lokasi
-          </a>
         </div>
       </div>
     </section>
