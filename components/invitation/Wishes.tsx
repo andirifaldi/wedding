@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbynai93vd1XfFHfh7UT2s05giAfXSmGBZxozZ_vnEknLc-MdFA0mbHvVRgEmMqoliCPMQ/exec";
 
+const PAGE_SIZE = 5;
+
 interface Wish {
   name: string;
   message: string;
@@ -19,14 +21,17 @@ export default function Wishes() {
   const [error, setError] = useState("");
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
-  // Fetch wishes from Google Sheets on mount
+  const totalPages = Math.ceil(wishes.length / PAGE_SIZE);
+  const paginatedWishes = wishes.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   useEffect(() => {
     fetch(APPS_SCRIPT_URL)
       .then((res) => res.json())
       .then((data) => {
         if (data.data) {
-          setWishes(data.data.reverse()); // newest first
+          setWishes(data.data.reverse());
         }
       })
       .catch(() => {})
@@ -53,8 +58,8 @@ export default function Wishes() {
       setSent(true);
       setName("");
       setMessage("");
+      setPage(1);
 
-      // Refresh list after a short delay (Google Sheets needs ~2-3s to save)
       setTimeout(() => {
         fetch(APPS_SCRIPT_URL)
           .then((res) => res.json())
@@ -129,7 +134,7 @@ export default function Wishes() {
           </div>
         </div>
 
-        {/* Wishes list from Google Sheets */}
+        {/* Wishes list with pagination */}
         {loading ? (
           <div className="text-center text-rose-400 text-sm py-4">Memuat...</div>
         ) : wishes.length === 0 ? (
@@ -137,26 +142,63 @@ export default function Wishes() {
             Belum ada ucapan. Jadilah yang pertama!
           </div>
         ) : (
-          <div className="space-y-4">
-            {wishes.map((wish, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-5 shadow-sm border border-rose-100"
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-400 to-amber-400 flex items-center justify-center text-white font-bold text-sm">
-                    {wish.name[0]}
+          <>
+            <div className="space-y-4">
+              {paginatedWishes.map((wish, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-5 shadow-sm border border-rose-100"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-400 to-amber-400 flex items-center justify-center text-white font-bold text-sm">
+                      {wish.name[0]}
+                    </div>
+                    <p className="font-semibold text-rose-800 text-sm">
+                      {wish.name}
+                    </p>
                   </div>
-                  <p className="font-semibold text-rose-800 text-sm">
-                    {wish.name}
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {wish.message}
                   </p>
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {wish.message}
-                </p>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-2 mt-6">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="w-9 h-9 rounded-full bg-white border border-rose-200 text-rose-800 font-bold text-sm hover:bg-rose-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                >
+                  ‹
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p)}
+                    className={`w-9 h-9 rounded-full text-sm font-medium transition-colors ${
+                      p === page
+                        ? "bg-rose-800 text-white"
+                        : "bg-white border border-rose-200 text-rose-800 hover:bg-rose-50"
+                    }`}
+                  >
+                    {p}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="w-9 h-9 rounded-full bg-white border border-rose-200 text-rose-800 font-bold text-sm hover:bg-rose-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                >
+                  ›
+                </button>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
     </section>
