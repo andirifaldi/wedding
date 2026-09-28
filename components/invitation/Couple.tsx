@@ -21,7 +21,6 @@ export default function Couple() {
           <h3 className="text-2xl font-serif font-bold text-rose-800 mb-1">
             {invitation.bride.name}
           </h3>
-          <p className="text-rose-600 text-sm">{invitation.bride.parents}</p>
         </div>
 
         {/* Ampersand */}
@@ -38,7 +37,6 @@ export default function Couple() {
           <h3 className="text-2xl font-serif font-bold text-rose-800 mb-1">
             {invitation.groom.name}
           </h3>
-          <p className="text-rose-600 text-sm">{invitation.groom.parents}</p>
         </div>
       </div>
     </section>
