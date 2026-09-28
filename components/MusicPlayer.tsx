@@ -1,32 +1,31 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 export default function MusicPlayer() {
-  const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const hasPlayed = useRef(false);
 
   useEffect(() => {
     audioRef.current = new Audio("/music/wedding.mp3");
     audioRef.current.loop = true;
+    audioRef.current.volume = 0.5;
+
+    const startMusic = () => {
+      if (hasPlayed.current || !audioRef.current) return;
+      audioRef.current.play().catch(() => {});
+      hasPlayed.current = true;
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
+    };
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
+
+    return () => {
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
+    };
   }, []);
 
-  const toggle = () => {
-    if (!audioRef.current) return;
-    if (playing) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {});
-    }
-    setPlaying(!playing);
-  };
-
-  return (
-    <button
-      onClick={toggle}
-      className="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-rose-800 text-cream shadow-lg flex items-center justify-center text-xl hover:bg-rose-700 transition-all"
-      title={playing ? "Matikan Musik" : "Putar Musik"}
-    >
-      {playing ? "🔇" : "🎵"}
-    </button>
-  );
+  return null;
 }
