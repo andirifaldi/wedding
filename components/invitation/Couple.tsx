@@ -4,8 +4,8 @@ export default function Couple() {
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-rose-50 to-white text-center">
       <div className="max-w-md mx-auto">
-        <p className="text-amber-500 text-xs tracking-[0.4em] uppercase mb-2">
-         Dengan Hormat
+        <p className="text-amber-600 text-xs tracking-widest uppercase mb-2">
+          Maha Suci Allah SWT, yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan putra-putri kami:
         </p>
         <h2 className="text-3xl font-serif font-bold text-rose-800 mb-12">
           Mempelai
