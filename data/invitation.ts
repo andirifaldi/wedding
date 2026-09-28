@@ -22,7 +22,7 @@ export const invitation = {
       name: "Akad Nikah",
       day: "Ahad",
       date: "20 September 2026",
-      time: "08:00 WIB - selesai",
+      time: "09:00 WIB - selesai",
       location: "Jalan Sumurbor Gang Attaqwa II no. 40 RT.6/Rw.12 kalideres",
     },
     resepsi: {
