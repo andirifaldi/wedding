@@ -17,8 +17,21 @@ export const invitation = {
     address: "Jalan Sumurbor Gang Attaqwa II no. 40 RT.6/Rw.12 kalideres",
     mapsUrl: "https://maps.google.com/?q=Jakarta+Convention+Center",
   },
-  event: {
-    acara: "11:00 WIB - selesai",
+  events: {
+    akad: {
+      name: "Akad Nikah",
+      day: "Ahad",
+      date: "20 September 2026",
+      time: "08:00 WIB - selesai",
+      location: "Jalan Sumurbor Gang Attaqwa II no. 40 RT.6/Rw.12 kalideres",
+    },
+    resepsi: {
+      name: "Resepsi",
+      day: "Sabtu",
+      date: "3 Oktober 2026",
+      time: "11:00 WIB - selesai",
+      location: "Jalan Sumurbor Gang Attaqwa II no. 40 RT.6/Rw.12 kalideres",
+    },
   },
   whatsappNumber: "6287865622562",
 };

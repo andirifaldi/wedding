@@ -1,6 +1,8 @@
 import { invitation } from "@/data/invitation";
 
 export default function Event() {
+  const { akad, resepsi } = invitation.events;
+
   return (
     <section className="py-16 px-6 bg-cream/20">
       <div className="max-w-lg mx-auto text-center">
@@ -11,29 +13,63 @@ export default function Event() {
           Detail Pernikahan
         </h2>
 
-        <div className="bg-white rounded-3xl p-8 shadow-sm border border-rose-100">
-          <div className="text-amber-600 text-sm font-semibold tracking-wider uppercase mb-1">
-            {invitation.wedding.day}
+        {/* Akad Nikah */}
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-rose-100 mb-6">
+          <div className="text-amber-600 text-sm font-bold tracking-wider uppercase mb-1">
+            {akad.name}
           </div>
-          <div className="text-4xl font-serif font-bold text-rose-800 mb-6">
-            {invitation.wedding.date}
+          <div className="text-amber-500 text-xs tracking-wider uppercase mb-1">
+            {akad.day}
+          </div>
+          <div className="text-3xl font-serif font-bold text-rose-800 mb-4">
+            {akad.date}
           </div>
 
-          <div className="space-y-4 mb-8">
+          <div className="space-y-3 mb-6">
             <div className="flex items-start gap-3 text-left">
               <span className="text-rose-400 mt-0.5">🕐</span>
               <div>
-                <p className="font-semibold text-rose-800 text-sm">Acara</p>
-                <p className="text-gray-500 text-sm">{invitation.event.acara}</p>
+                <p className="font-semibold text-rose-800 text-sm">Waktu</p>
+                <p className="text-gray-500 text-sm">{akad.time}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 text-left">
+              <span className="text-rose-400 mt-0.5">📍</span>
+              <div>
+                <p className="font-semibold text-rose-800 text-sm">Tempat</p>
+                <p className="text-gray-500 text-sm">{akad.location}</p>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="border-t border-rose-100 pt-6 mb-6">
-            <p className="font-serif font-bold text-rose-800 text-lg mb-1">
-              {invitation.wedding.location}
-            </p>
-            <p className="text-gray-500 text-sm">{invitation.wedding.address}</p>
+        {/* Resepsi */}
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-rose-100">
+          <div className="text-amber-600 text-sm font-bold tracking-wider uppercase mb-1">
+            {resepsi.name}
+          </div>
+          <div className="text-amber-500 text-xs tracking-wider uppercase mb-1">
+            {resepsi.day}
+          </div>
+          <div className="text-3xl font-serif font-bold text-rose-800 mb-4">
+            {resepsi.date}
+          </div>
+
+          <div className="space-y-3 mb-6">
+            <div className="flex items-start gap-3 text-left">
+              <span className="text-rose-400 mt-0.5">🕐</span>
+              <div>
+                <p className="font-semibold text-rose-800 text-sm">Waktu</p>
+                <p className="text-gray-500 text-sm">{resepsi.time}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 text-left">
+              <span className="text-rose-400 mt-0.5">📍</span>
+              <div>
+                <p className="font-semibold text-rose-800 text-sm">Tempat</p>
+                <p className="text-gray-500 text-sm">{resepsi.location}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
