@@ -11,3 +11,9 @@ services:
       - ./public/music:/app/public/music:ro
     environment:
       - NODE_ENV=production
+    networks:
+      - tunnel
+
+networks:
+  tunnel:
+    external: true
