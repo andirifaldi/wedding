@@ -15,6 +15,9 @@ export default function Couple() {
           <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center mb-4 shadow-lg">
             <span className="text-4xl">👰</span>
           </div>
+          <p className="text-amber-600 text-xs tracking-widest uppercase mb-1">
+            {invitation.bride.order}
+          </p>
           <h3 className="text-2xl font-serif font-bold text-rose-800 mb-1">
             {invitation.bride.name}
           </h3>
@@ -29,6 +32,9 @@ export default function Couple() {
           <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center mb-4 shadow-lg">
             <span className="text-4xl">🤵</span>
           </div>
+          <p className="text-amber-600 text-xs tracking-widest uppercase mb-1">
+            {invitation.groom.order}
+          </p>
           <h3 className="text-2xl font-serif font-bold text-rose-800 mb-1">
             {invitation.groom.name}
           </h3>

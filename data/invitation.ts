@@ -1,10 +1,12 @@
 export const invitation = {
   groom: {
     name: "Aditya Fahmi Nugraha",
+    order: "Putra ke-1 dari",
     parents: "Bapak Ishak Iskandar & Ibu Nani Maryani",
   },
   bride: {
     name: "Vera Noverinda",
+    order: "Putri ke-2 dari",
     parents: "Bapak Nugroho & Ibu Paryati",
   },
   wedding: {
