@@ -33,13 +33,6 @@ export default function Event() {
                 <p className="text-gray-500 text-sm">{akad.time}</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 text-left">
-              <span className="text-rose-400 mt-0.5">📍</span>
-              <div>
-                <p className="font-semibold text-rose-800 text-sm">Tempat</p>
-                <p className="text-gray-500 text-sm">{akad.location}</p>
-              </div>
-            </div>
           </div>
         </div>
 
